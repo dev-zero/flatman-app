@@ -4,8 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ReportService } from './reports.service';
 
 @Component({
-  templateUrl: 'reports/reports-comparison.component.html',
-  styleUrls: ['reports/reports.component.css'],
+  templateUrl: 'reports-comparison.component.html',
+  styleUrls: ['reports.component.css'],
 })
 
 export class ReportsComparison implements OnInit, OnDestroy {

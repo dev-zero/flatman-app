@@ -15,8 +15,8 @@ export class DeltavaluePipe implements PipeTransform {
 
 @Component({
   selector: 'periodictable',
-  templateUrl: 'periodictable/periodictable-list.component.html',
-  styleUrls: ['periodictable/periodictable-list.component.css'],
+  templateUrl: 'periodictable-list.component.html',
+  styleUrls: ['periodictable-list.component.css'],
   providers: [PeriodictableService],
 })
 

@@ -58,7 +58,7 @@ import { ReportService } from './reports.service';
       </div>
     </div>
   `,
-  styleUrls: ['reports/reports.component.css']
+  styleUrls: ['reports.component.css']
 })
 
 export class ReportsElementComparison implements OnInit, OnDestroy {

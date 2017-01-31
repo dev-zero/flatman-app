@@ -5,8 +5,8 @@ import { PseudoService } from './pseudo.service';
 
 @Component({
   selector: 'pseudotable',
-  templateUrl: 'pseudos/pseudo-table.component.html',
-  styleUrls: ['pseudos/pseudo-table.component.css'],
+  templateUrl: 'pseudo-table.component.html',
+  styleUrls: ['pseudo-table.component.css'],
 })
 
 export class PseudoTable implements OnChanges {
