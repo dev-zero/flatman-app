@@ -35,7 +35,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config dev-proxy.conf.json",
     "lint": "tslint \"src/**/*.ts\" --project src/tsconfig.json --type-check"
   },
   "angular-cli": {},

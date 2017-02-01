@@ -2,9 +2,13 @@
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.26.
 
+## Bootstrap
+
+After cloning this repository, run `npm install` to install all required dependencies.
+
 ## Development server
 
-Run `ng serve --proxy-config dev-proxy.conf.json` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files and the API requests will be passed to `http://localhost:5000`.
+Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files and the API requests will be passed to `http://localhost:5000`.
 
 ## Code scaffolding
 
