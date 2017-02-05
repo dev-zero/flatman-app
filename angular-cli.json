@@ -1,6 +1,6 @@
 {
   "project": {
-    "version": "1.0.0-beta.26",
+    "version": "1.0.0-beta.29",
     "name": "FATMAN"
   },
   "apps": [
@@ -25,7 +25,7 @@
       "scripts": [
         "../node_modules/jquery/dist/jquery.js",
         "../node_modules/bootstrap/dist/js/bootstrap.js",
-        "../node_modules/chart.js/dist/Chart.min.js"
+        "../node_modules/plotly.js/dist/plotly-basic.js"
       ],
       "environments": {
         "source": "environments/environment.ts",
@@ -34,16 +34,6 @@
       }
     }
   ],
-  "e2e": {
-    "protractor": {
-      "config": "./protractor.conf.js"
-    }
-  },
-  "test": {
-    "karma": {
-      "config": "./karma.conf.js"
-    }
-  },
   "defaults": {
     "styleExt": "css",
     "prefixInterfaces": false,
