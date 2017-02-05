@@ -1,5 +1,6 @@
 
 import { Component, OnInit, HostBinding,
+         ViewChildren, ElementRef, AfterViewInit, QueryList,
          trigger, transition, animate,
          style, state } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -8,6 +9,12 @@ import { Calculation }         from './calculation';
 import { CalculationsService } from './calculations.service';
 import { Task2Service }        from '../task2/task.service';
 import { Task2 }               from '../task2/task';
+
+// I can't use typings as recommended by angular-cli since they
+// pull in the plotly.js source package which in turn needs to be
+// processed by the ify-loader which I can't enable in angular-cli
+// since they don't expose the webpack configuration
+declare var Plotly: any;
 
 @Component({
   template: `
@@ -108,15 +115,7 @@ import { Task2 }               from '../task2/task';
                   </tbody>
                 </table>
 
-                <div style="display: block;">
-                  <canvas baseChart width="400" height="400"
-                    [datasets]="lineChartData"
-                    [labels]="lineChartLabels"
-                    [chartType]="lineChartType"
-                    [options]="lineChartOptions"
-                    >
-                  </canvas>
-                </div>
+                <div #deltatestPlot style="display: block;"></div>
               </div>
 
               <div class="list-group-item-text"
@@ -161,7 +160,7 @@ import { Task2 }               from '../task2/task';
     ])
   ]
 })
-export class CalculationDetailComponent implements OnInit {
+export class CalculationDetailComponent implements OnInit, AfterViewInit {
   @HostBinding('@routeAnimation') get routeAnimation() {
     return true;
   }
@@ -174,19 +173,10 @@ export class CalculationDetailComponent implements OnInit {
     return 'absolute';
   }
 
+  @ViewChildren('deltatestPlot') plots: QueryList<ElementRef>;
+
   public calculation: Calculation;
-  public lineChartData: Array<any> = [];
-  public lineChartType:string = 'line';
-  public lineChartOptions:any = {
-    animation: false,
-    responsive: true,
-	scales: {
-	  xAxes: [{
-		type: 'linear',
-		position: 'bottom'
-	  }]
-	}
-  };
+  public data: Array<any> = [];
 
   constructor(
     private _route: ActivatedRoute,
@@ -213,12 +203,13 @@ export class CalculationDetailComponent implements OnInit {
           if (dtres.status == 'fitted')
             E0 = dtres.coefficients.E0;
 
-          this.lineChartData.push({
-            data: dtres.volumes.map(function(x, i) {return {x: x, y: dtres.energies[i] - E0}; }),
-            label: 'calculated',
-            fill: false,
-            showLine: false
-          });
+          this.data = [{x: dtres.volumes,
+                        y: dtres.energies.map(function(y) { return y - E0; }),
+                        type: 'scatter',
+                        mode: 'markers',
+                        name: 'calculated'
+                       }]
+
 
           if (dtres.status == 'fitted') {
             let Vmin = dtres.volumes[0];
@@ -226,8 +217,9 @@ export class CalculationDetailComponent implements OnInit {
             let V0 = dtres.coefficients.V;
             let B0 = dtres.coefficients.B0 * 1.e9 / 1.602176565e-19 / 1.e30;
             let B1 = dtres.coefficients.B1;
-            let n = 100;
-            let VE = Array<any>(n);
+            let n = 20;
+            let V = Array<any>(n);
+            let E = Array<any>(n);
             for (let i=0; i < n; ++i) {
               let v = Math.min(0.93*V0, Vmin)*(1-i/n) + Math.max(1.07*V0, Vmax)*(i/n);
 
@@ -236,18 +228,46 @@ export class CalculationDetailComponent implements OnInit {
                   ((V0/v)**(2./3.) -1)**3 * B1 +
                   ((V0/v)**(2./3.) -1)**2 * (6-4*(V0/v)**(2./3.)) );
 
-              VE[i] = {x: v, y: e};
+              V[i] = v;
+              E[i] = e;
             }
 
-            this.lineChartData.push({
-              data: VE,
-              label: 'fitted',
-              fill: false,
-              pointRadius: 0
-            });
+            this.data.push({
+              x: V,
+              y: E,
+              type: 'scatter',
+              name: 'BM-fit',
+              mode: 'lines',
+              line: {
+                shape: 'spline'
+              }
+            })
           }
         }
       });
+  }
+
+  public ngAfterViewInit(): void {
+    // According to the docs at
+    // https://angular.io/docs/ts/latest/api/core/index/ViewChildren-decorator.html
+    // ViewChildren are only guaranteed to be set up before ngAfterViewInit
+    this.plots.changes.subscribe((plots: QueryList<ElementRef>) => {
+      let layout = {
+        title: 'Deltatest',
+        showlegend: true,
+        xaxis: {
+          title: 'Volume',
+          showgrid: true,
+          zeroline: false
+        },
+        yaxis: {
+          title: 'Energy',
+          showline: false
+        }
+      };
+
+      Plotly.newPlot(plots.first.nativeElement, this.data, layout);
+    });
   }
 
   public gotoCalculations() {
