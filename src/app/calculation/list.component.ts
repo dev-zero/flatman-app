@@ -36,7 +36,7 @@ import { Calculation } from './calculation';
             <td>{{ calculation.current_task.status }}</td>
             <td><i class="fa" aria-hidden="true"
                  [class.fa-check]="calculation.results_available"
-                 [class.fa-times]="!calculation.results_available"></i>
+                 [class.fa-clock-o]="!calculation.results_available"></i>
             </td>
           </tr>
         </tbody>
