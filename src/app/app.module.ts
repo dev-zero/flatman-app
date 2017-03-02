@@ -42,13 +42,16 @@ import { IterablePipe, SettingsPipe, ConcatPipe, StringifyPipe } from './common/
 import { MaterialModule } from '@angular/material';
 import 'hammerjs';
 
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     routing,
     HttpModule,
-    MaterialModule
+    MaterialModule,
+    NgxDatatableModule
   ],
   declarations: [
     AppComponent,
