@@ -16,3 +16,4 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/from';
+import 'rxjs/add/observable/interval';

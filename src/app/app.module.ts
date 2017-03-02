@@ -33,6 +33,7 @@ import { PseudoService }           from './pseudos/pseudo.service';
 import { DeltatestResultsService } from './deltatest/results.service';
 import { CalculationsService }     from './calculation/calculations.service';
 import { Task2Service }            from './task2/task.service';
+import { Task2ListComponent }      from './task2/task-list.component';
 
 import { TruncatePipe }                           from './details/testdetails.component';
 import { DeltavaluePipe }                         from './periodictable/periodictable-list.component';
@@ -80,7 +81,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     SettingsPipe,
     ConcatPipe,
     DeltavaluePipe,
-    StringifyPipe
+    StringifyPipe,
+    Task2ListComponent
   ],
   providers: [
     ReportService,

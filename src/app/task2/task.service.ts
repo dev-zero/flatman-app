@@ -2,22 +2,65 @@ import { Http, Headers, Response, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Task2 } from './task';
 
 @Injectable()
 export class Task2Service {
-  constructor(private _http: Http) {
-  }
-
+  private _headers: Headers;
   private _tasksUrl = '../api/v2/tasks';
 
+  private _taskStatuses: string[];
+  private _tasks: BehaviorSubject<Task2[]>;
+
+  constructor(private _http: Http) {
+    this._taskStatuses = [
+      "new",
+      "pending",
+      "running",
+      "done",
+      "error",
+      "deferred",
+      "cancelled",
+    ]
+
+    this._tasks = new BehaviorSubject<Task2[]>([]);
+
+    this._headers = new Headers();
+    this._headers.append('Content-Type', 'application/json');
+
+    // fetch the tasks
+    this._getTasks().subscribe(tasks => this._tasks.next(tasks));
+
+    // create an observable polling the tasks and shovel them into the BehaviorSubject
+    // The idea behind the usage of a BehaviorSubject as an intermediate compared to
+    // directly return a (shared) Observable is to introduce things like server-side
+    // filtering, filter-state sharing, caching, websocket client updates,
+    // updating entries to full objects and caching this data
+    Observable.interval(1000 * 60 * 5 /* ms */)
+      .switchMap(() => this._getTasks())
+      .subscribe(tasks => this._tasks.next(tasks));
+  }
+
+  private _getTasks() {
+    return this._http.get(this._tasksUrl, {headers: this._headers})
+      .map(response => response.json() as Task2[])
+      .catch(this.handleError);
+  }
+
+  public getStatuses(): Observable<string[]> {
+    return Observable.of(this._taskStatuses);
+  }
+
   public getTask(id: string) : Observable<Task2> {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this._http.get(this._tasksUrl + '/' + id, {headers: headers})
+    return this._http.get(this._tasksUrl + '/' + id, {headers: this._headers})
       .map(response => response.json() as Task2)
       .catch(this.handleError);
+  }
+
+  public getTasks() {
+    return this._tasks.asObservable();
   }
 
   private handleError(error: any) {

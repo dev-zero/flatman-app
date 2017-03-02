@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-md-2">
+    <h3>Filters</h3>
+
+    <h4>Status</h4>
+    <ul>
+      <li>(all)</li>
+      <li *ngFor="let status of statuses | async">{{ status }}</li>
+    </ul>
+  </div>
+  <div class="col-md-10">
+    <ngx-datatable
+      class="material"
+      [rows]="tasks | async"
+      [columnMode]="'force'"
+      [headerHeight]="32"
+      [footerHeight]="32"
+      [rowHeight]="'auto'"
+      [limit]="10"
+      [rowIdentity]="getTaskId">
+      <ngx-datatable-column name="id" [minWidth]=300>
+        <template ngx-datatable-header-template>
+          ID
+        </template>
+        <template let-id="value" ngx-datatable-cell-template>
+          <small><samp>{{ id }}</samp></small>
+        </template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Machine">
+        <template let-machine="value" ngx-datatable-cell-template>
+          {{ machine }}
+        </template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="ctime">
+        <template let-sort="sortFn" ngx-datatable-header-template>
+          <span (click)="sort()">Created</span>
+        </template>
+        <template let-ctime="value" ngx-datatable-cell-template>
+          {{ ctime | date:'short' }}
+        </template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="mtime">
+        <template let-sort="sortFn" ngx-datatable-header-template>
+          <span (click)="sort()">Updated</span>
+        </template>
+        <template let-mtime="value" ngx-datatable-cell-template>
+          {{ mtime | date:'short' }}
+        </template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Status">
+        <template let-status="value" ngx-datatable-cell-template>
+          {{ status }}
+        </template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>
