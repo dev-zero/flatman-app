@@ -38,12 +38,17 @@ import { TruncatePipe }                           from './details/testdetails.co
 import { DeltavaluePipe }                         from './periodictable/periodictable-list.component';
 import { IterablePipe, SettingsPipe, ConcatPipe, StringifyPipe } from './common/pipes';
 
+// Angular Material
+import { MaterialModule } from '@angular/material';
+import 'hammerjs';
+
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     routing,
-    HttpModule
+    HttpModule,
+    MaterialModule
   ],
   declarations: [
     AppComponent,
