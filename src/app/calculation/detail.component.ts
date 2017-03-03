@@ -70,7 +70,7 @@ declare var Plotly: any;
           <dl class="dl-horizontal">
             <template ngFor let-result [ngForOf]="calculation.results | mapToIterable">
               <dt>{{ result.key }}</dt>
-              <dd>{{ result.value }}</dd>
+              <dd>{{ result.value | json }}</dd>
             </template>
           </dl>
         </div>
@@ -103,8 +103,8 @@ declare var Plotly: any;
                 <table class="table table-bordered table-condensed">
                   <thead>
                     <tr>
-                      <td>Volume</td>
-                      <td>Energy</td>
+                      <td>V [Å<sup>3</sup>]</td>
+                      <td>E/n<sub>A</sub> [E<sub>h</sub>]</td>
                     </tr>
                   </thead>
                   <tbody>
@@ -207,7 +207,7 @@ export class CalculationDetailComponent implements OnInit, AfterViewInit {
                         y: dtres.energies.map(function(y) { return y - E0; }),
                         type: 'scatter',
                         mode: 'markers',
-                        name: 'calculated'
+                        name: 'E/n - E<sub>0</sub>'
                        }]
 
 
