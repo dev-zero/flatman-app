@@ -17,7 +17,8 @@
       [footerHeight]="32"
       [rowHeight]="'auto'"
       [limit]="25"
-      [rowIdentity]="getTaskId">
+      [rowIdentity]="getTaskId"
+      [sorts]="[{prop: 'mtime', dir: 'desc'}]">
       <ngx-datatable-column name="id" [minWidth]=300>
         <template ngx-datatable-header-template>
           ID
