@@ -12,6 +12,8 @@ export class Task2Service {
   private _tasksUrl = '../api/v2/tasks';
 
   private _taskStatuses: string[];
+  private _statusFilter: string;
+
   private _tasks: BehaviorSubject<Task2[]>;
 
   constructor(private _http: Http) {
@@ -24,6 +26,7 @@ export class Task2Service {
       "deferred",
       "cancelled",
     ]
+    this._statusFilter = "";
 
     this._tasks = new BehaviorSubject<Task2[]>([]);
 
@@ -44,7 +47,12 @@ export class Task2Service {
   }
 
   private _getTasks() {
-    return this._http.get(this._tasksUrl, {headers: this._headers})
+    let params: URLSearchParams = new URLSearchParams();
+
+    if (this._statusFilter != "")
+      params.set('status', this._statusFilter);
+
+    return this._http.get(this._tasksUrl, {headers: this._headers, search: params})
       .map(response => response.json() as Task2[])
       .catch(this.handleError);
   }
@@ -61,6 +69,25 @@ export class Task2Service {
 
   public getTasks() {
     return this._tasks.asObservable();
+  }
+
+  public filterByStatus(filter: string) {
+    // invalid or empty filters reset the status filter
+    if (this._taskStatuses.indexOf(filter) < 0)
+      filter = "";
+
+    // if  the filter is set again, ignore it
+    if (filter == this._statusFilter)
+      return;
+
+    this._statusFilter = filter;
+
+    // fetch right now
+    this._getTasks().subscribe(tasks => this._tasks.next(tasks));
+  }
+
+  public getStatusFilter() {
+    return this._statusFilter;
   }
 
   private handleError(error: any) {

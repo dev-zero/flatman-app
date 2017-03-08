@@ -13,17 +13,26 @@ import { Task2Service } from './task.service';
 export class Task2ListComponent implements OnInit {
   tasks: Observable<Task2[]>;
   statuses: Observable<string[]>;
+  statusFilter: string;
+
+  private _service: Task2Service;
 
   getTaskId(task: Task2) {
     return task.id;
   }
 
   constructor(_service: Task2Service) {
+    this._service = _service;
+
     this.tasks = _service.getTasks();
     this.statuses = _service.getStatuses();
+    this.statusFilter = _service.getStatusFilter();
   }
 
   ngOnInit() {
   }
 
+  setStatusFilter(filter: string) {
+    this._service.filterByStatus(filter);
+  }
 }
