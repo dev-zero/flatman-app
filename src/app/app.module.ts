@@ -44,6 +44,7 @@ import { MaterialModule } from '@angular/material';
 import 'hammerjs';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { DeltatestReportComponent } from './testresult/deltatest-report/deltatest-report.component';
 
 @NgModule({
   imports: [
@@ -82,7 +83,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     ConcatPipe,
     DeltavaluePipe,
     StringifyPipe,
-    Task2ListComponent
+    Task2ListComponent,
+    DeltatestReportComponent
   ],
   providers: [
     ReportService,

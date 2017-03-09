@@ -14,6 +14,7 @@ import { DeltatestResultsComponent }  from './deltatest/results.component';
 import { Task2ListComponent }         from './task2/task-list.component';
 import { CalculationListComponent }   from './calculation/list.component';
 import { CalculationDetailComponent } from './calculation/detail.component';
+import { DeltatestReportComponent }   from './testresult/deltatest-report/deltatest-report.component';
 
 const appRoutes: Routes = [
   { path: '',                                      redirectTo: '/home', pathMatch: 'full' },
@@ -33,6 +34,7 @@ const appRoutes: Routes = [
   { path: 'tasks',                                 component : Task2ListComponent },
   { path: 'calculations',                          component : CalculationListComponent },
   { path: 'calculations/:id',                      component : CalculationDetailComponent },
+  { path: 'testresults/deltatest-report',          component : DeltatestReportComponent },
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

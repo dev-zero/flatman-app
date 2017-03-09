@@ -23,6 +23,14 @@ import './rxjs-operators';
             <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
             <li><a routerLink="/tasks" routerLinkActive="active">Tasks</a></li>
             <li><a routerLink="/calculations" routerLinkActive="active">Calculations</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                role="button" aria-haspopup="true" aria-expanded="false">
+                Test Results <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a routerLink="/testresults/deltatest-report" routerLinkActive="active">Deltatest Reports</a></li>
+                </ul>
+            </li>
             <li><a routerLink="/machinestatus" routerLinkActive="active">Machine Status</a></li>
             <li><a routerLink="/methodlist" routerLinkActive="active">Method Overview</a></li>
             <li><a routerLink="/pseudos" routerLinkActive="active">Pseudos</a></li>
