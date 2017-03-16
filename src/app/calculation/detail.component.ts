@@ -67,12 +67,7 @@ declare var Plotly: any;
           <i class="fa fa-clock-o" aria-hidden="true"></i> not yet available
         </div>
         <div class="panel-body" *ngIf="calculation.results">
-          <dl class="dl-horizontal">
-            <template ngFor let-result [ngForOf]="calculation.results | mapToIterable">
-              <dt>{{ result.key }}</dt>
-              <dd>{{ result.value | json }}</dd>
-            </template>
-          </dl>
+          <tree-view [treeData]="calculation.results | mapToIterable"></tree-view>
         </div>
         <div class="list-group" *ngIf="calculation.testresults">
           <template ngFor let-testresult [ngForOf]="calculation.testresults">

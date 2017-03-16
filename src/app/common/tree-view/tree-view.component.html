@@ -1,0 +1,20 @@
+<dl class="row">
+  <template ngFor let-kvpair [ngForOf]="treeData">
+    <dt class="col-sm-3">{{ kvpair.key | underscoreToSpaces }}</dt>
+
+    <dd [ngSwitch]="getType(kvpair.value)" class="col-sm-9">
+      <tree-view [treeData]="kvpair.value | mapToIterable" *ngSwitchCase="'object'"></tree-view>
+
+      <ul *ngSwitchCase="'list'" class="list-unstyled">
+        <li *ngFor="let entry of kvpair.value" [ngSwitch]="getType(entry)">
+          <tree-view [treeData]="entry | mapToIterable" *ngSwitchCase="'object'"></tree-view>
+          <template ngSwitchDefault>{{ entry }}</template>
+        </li>
+      </ul>
+
+      <template [ngSwitchCase]="'empty'">(none)</template>
+
+      <template ngSwitchDefault>{{ kvpair.value }}</template>
+    </dd>
+  </template>
+</dl>

@@ -45,6 +45,8 @@ import 'hammerjs';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { DeltatestReportComponent } from './testresult/deltatest-report/deltatest-report.component';
+import { TreeViewComponent } from './common/tree-view/tree-view.component';
+import { UnderscoreToSpacesPipe } from './underscore-to-spaces.pipe';
 
 @NgModule({
   imports: [
@@ -84,7 +86,9 @@ import { DeltatestReportComponent } from './testresult/deltatest-report/deltates
     DeltavaluePipe,
     StringifyPipe,
     Task2ListComponent,
-    DeltatestReportComponent
+    DeltatestReportComponent,
+    TreeViewComponent,
+    UnderscoreToSpacesPipe
   ],
   providers: [
     ReportService,
