@@ -21,6 +21,12 @@ export class TestresultService {
       .catch(this.handleError);
   }
 
+  getCollection(collectionId: string): Observable<TestresultCollection> {
+    return this._http.get(this._collectionUrl + `/${collectionId}`, {headers: this._headers})
+      .map(response => response.json() as TestresultCollection)
+      .catch(this.handleError);
+  }
+
   private handleError(error: any) {
     let errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';

@@ -48,6 +48,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { DeltatestReportComponent } from './testresult/deltatest-report/deltatest-report.component';
 import { TreeViewComponent } from './common/tree-view/tree-view.component';
 import { UnderscoreToSpacesPipe } from './underscore-to-spaces.pipe';
+import { DeltatestReportListComponent } from './testresult/deltatest-report/deltatest-report-list.component';
 
 @NgModule({
   imports: [
@@ -89,7 +90,8 @@ import { UnderscoreToSpacesPipe } from './underscore-to-spaces.pipe';
     Task2ListComponent,
     DeltatestReportComponent,
     TreeViewComponent,
-    UnderscoreToSpacesPipe
+    UnderscoreToSpacesPipe,
+    DeltatestReportListComponent
   ],
   providers: [
     ReportService,

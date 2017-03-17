@@ -1,0 +1,8 @@
+<div *ngIf="collection">
+  <h3>{{ collection.name }}</h3>
+  <ul>
+    <li *ngFor="let testresult of collection.testresults">
+      {{ testresult.id }}: {{ testresult.test }}, {{ testresult.data | json }}
+    </li>
+  </ul>
+</div>
