@@ -1,8 +1,20 @@
 <div *ngIf="collection">
   <h3>{{ collection.name }}</h3>
-  <ul>
-    <li *ngFor="let testresult of collection.testresults">
-      {{ testresult.id }}: {{ testresult.test }}, {{ testresult.data | json }}
-    </li>
-  </ul>
+
+  <h4>Summary</h4>
+  <dl>
+    <dt>Total number of node hours</dt>
+    <dd>{{ totalNodehours }}</dd>
+  </dl>
+
+  <h4>Details</h4>
+  <ngx-datatable
+        class="material"
+        [rows]="collection.testresults"
+        [columns]="columns"
+        [columnMode]="'force'"
+        [headerHeight]="32"
+        [footerHeight]="32"
+        [rowHeight]="'auto'">
+  </ngx-datatable>
 </div>
