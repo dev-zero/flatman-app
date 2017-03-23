@@ -25,8 +25,7 @@
       "scripts": [
         "../node_modules/jquery/dist/jquery.js",
         "../node_modules/bootstrap/dist/js/bootstrap.js",
-        "../node_modules/plotly.js/dist/plotly-basic.js",
-        "../node_modules/mendeleev/mendeleev.js"
+        "../node_modules/plotly.js/dist/plotly-basic.js"
       ],
      "environmentSource": "environments/environment.ts",
       "environments": {
