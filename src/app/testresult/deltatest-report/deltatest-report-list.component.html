@@ -2,19 +2,42 @@
   <h3>{{ collection.name }}</h3>
 
   <h4>Summary</h4>
-  <dl>
-    <dt>Total number of node hours</dt>
-    <dd>{{ totalNodehours }}</dd>
+  <dl class="row">
+    <dt class="col-sm-3">Total node hours</dt>
+    <dd class="col-sm-9">{{ total_nodehours }}</dd>
+
+    <dt class="col-sm-3">Status</dt>
+    <dd class="col-sm-9">
+      <dl class="row">
+        <dt class="col-sm-3">Fitted</dt>
+        <dd class="col-sm-9">{{ fitted_count }}</dd>
+
+        <dt class="col-sm-3">Unfittable</dt>
+        <dd class="col-sm-9">{{ unfittable_count }}</dd>
+
+        <dt class="col-sm-3">Unknown</dt>
+        <dd class="col-sm-9">{{ total_count - unfittable_count - fitted_count }}</dd>
+      </dl>
+    </dd>
+
+    <dt class="col-sm-3">Checks</dt>
+    <dd class="col-sm-9">
+      <dl class="row">
+        <dt class="col-sm-3">Minimum <b>not</b> at V<sub>0</sub></dt>
+        <dd class="col-sm-9">{{ total_count - check_min_V0_count }}</dd>
+      </dl>
+    </dd>
+
   </dl>
 
   <h4>Details</h4>
   <ngx-datatable
-        class="material"
-        [rows]="collection.testresults"
-        [columns]="columns"
-        [columnMode]="'force'"
-        [headerHeight]="32"
-        [footerHeight]="32"
-        [rowHeight]="'auto'">
+    class="material"
+    [rows]="collection.testresults"
+    [columns]="columns"
+    [columnMode]="'force'"
+    [headerHeight]="32"
+    [footerHeight]="32"
+    [rowHeight]="'auto'">
   </ngx-datatable>
 </div>

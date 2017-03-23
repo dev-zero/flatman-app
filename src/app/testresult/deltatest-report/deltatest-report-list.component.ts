@@ -12,13 +12,17 @@ export class DeltatestReportListComponent implements OnChanges {
   @Input() collectionId;
 
   collection: TestresultCollection;
-  totalNodehours: number;
+  total_nodehours: number;
+  total_count: number;
+  unfittable_count: number;
+  fitted_count: number;
+  check_min_V0_count: number;
 
   columns = [
     { name: 'Element', prop: 'data.element', comparator: this.elementComparator.bind(this) },
     { name: 'Status', prop: 'data.status' },
-    { name: 'Min at V_0', prop: 'data.checks.min_at_V0' },
-    { name: 'Used NH', prop: 'data.nodehours.current_total' }
+    { name: 'Min at V<sub>0</sub>', prop: 'data.checks.min_at_V0' },
+    { name: 'Node Hours', prop: 'data.nodehours.current_total' }
   ]
 
   static elements = {
@@ -170,11 +174,25 @@ export class DeltatestReportListComponent implements OnChanges {
     if (!this.collection)
       return;
 
-    this.totalNodehours = 0;
+    this.total_nodehours = 0;
+    this.total_count = 0;
+    this.fitted_count = 0;
+    this.unfittable_count = 0;
+    this.check_min_V0_count = 0;
 
     for (let testresult of this.collection.testresults) {
+      this.total_count += 1;
+
+      if (testresult.data.status === "fitted")
+        this.fitted_count += 1;
+      else if (testresult.data.status === "unfittable")
+        this.unfittable_count += 1;
+
+      if (testresult.data.checks.min_at_V0)
+        this.check_min_V0_count += 1;
+
       if (testresult.data.nodehours)
-        this.totalNodehours += testresult.data.nodehours.current_total;
+        this.total_nodehours += testresult.data.nodehours.current_total;
     }
   }
 }
