@@ -29,12 +29,12 @@ export class DeltatestReportListComponent implements OnChanges {
   elementComparator(symbolA, symbolB) {
     // work around issue https://github.com/nickroberts404/Mendeleev/issues/1
     // by explicitly converting supposed to be numbers to actual numbers
-    let numberA = +mendeleev.PeriodicTable.getElement(symbolA).number;
-    let numberB = +mendeleev.PeriodicTable.getElement(symbolB).number;
+    let elementA = mendeleev.PeriodicTable.getElement(symbolA);
+    let elementB = mendeleev.PeriodicTable.getElement(symbolB);
 
-    if (numberA > numberB)
+    if (elementA.number > elementB.number)
       return 1;
-    else if (numberA < numberB)
+    else if (elementA.number < elementB.number)
       return -1;
 
     return 0;

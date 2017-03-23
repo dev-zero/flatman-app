@@ -17,7 +17,7 @@ declare module 'mendeleev' {
         specificheat: number;
     }
 
-    declare namespace PeriodicTable {
+    namespace PeriodicTable {
         function getElement(s: string): Element;
     }
 
