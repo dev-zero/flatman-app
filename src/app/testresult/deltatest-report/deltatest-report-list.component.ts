@@ -17,11 +17,13 @@ export class DeltatestReportListComponent implements OnChanges {
   unfittable_count: number;
   fitted_count: number;
   check_min_V0_count: number;
+  check_all_converged_count: number;
 
   columns = [
     { name: 'Element', prop: 'data.element', comparator: this.elementComparator.bind(this) },
     { name: 'Status', prop: 'data.status' },
     { name: 'Min at V<sub>0</sub>', prop: 'data.checks.min_at_V0' },
+    { name: 'All converged', prop: 'data.checks.all_converged' },
     { name: 'Node Hours', prop: 'data.nodehours.current_total' }
   ]
 
@@ -179,6 +181,7 @@ export class DeltatestReportListComponent implements OnChanges {
     this.fitted_count = 0;
     this.unfittable_count = 0;
     this.check_min_V0_count = 0;
+    this.check_all_converged_count = 0;
 
     for (let testresult of this.collection.testresults) {
       this.total_count += 1;
@@ -188,8 +191,10 @@ export class DeltatestReportListComponent implements OnChanges {
       else if (testresult.data.status === "unfittable")
         this.unfittable_count += 1;
 
-      if (testresult.data.checks.min_at_V0)
-        this.check_min_V0_count += 1;
+      if (testresult.data.checks) {
+        this.check_min_V0_count += testresult.data.checks.min_at_V0;
+        this.check_all_converged_count += testresult.data.checks.all_converged;
+      }
 
       if (testresult.data.nodehours)
         this.total_nodehours += testresult.data.nodehours.current_total;

@@ -33,8 +33,12 @@
     <dt class="col-sm-3">Checks</dt>
     <dd class="col-sm-9">
       <dl class="row">
-        <dt class="col-sm-3">Minimum <b>not</b> at V<sub>0</sub></dt>
+        <dt class="col-sm-3">Minimum energy <b>not</b> at V<sub>0</sub></dt>
         <dd class="col-sm-9">{{ total_count - check_min_V0_count }}</dd>
+      </dl>
+      <dl class="row">
+        <dt class="col-sm-3">Testresults with non-converged calculations</dt>
+        <dd class="col-sm-9">{{ total_count - check_all_converged_count }}</dd>
       </dl>
     </dd>
 
