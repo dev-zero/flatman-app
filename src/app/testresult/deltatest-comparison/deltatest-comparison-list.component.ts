@@ -14,11 +14,8 @@ export class DeltatestComparisonListComponent implements OnChanges {
   comparison: DeltatestComparison;
 
   columns = [
-    // { name: 'Element', prop: 'data.element', comparator: this.elementComparator.bind(this) },
-    // { name: 'Status', prop: 'data.status' },
-    // { name: 'Min at V<sub>0</sub>', prop: 'data.checks.min_at_V0' },
-    // { name: 'All converged', prop: 'data.checks.all_converged' },
-    // { name: 'Node Hours', prop: 'data.nodehours.current_total' }
+    { name: 'Element', prop: 'element', comparator: this.elementComparator.bind(this) },
+    { name: '&Delta; Value', prop: 'delta' }
   ]
 
   static elements = {
@@ -158,10 +155,9 @@ export class DeltatestComparisonListComponent implements OnChanges {
   }
 
   ngOnChanges(changes: {[propertyName: string]: SimpleChange}) {
-    // if (changes['collectionId'] && this.collectionId)
-    //   this._service.getCollection(this.collectionId)
-    //     .subscribe(collection => {
-    //       this.collection = collection;
-    //     });
+    console.log("something changed");
+    if (changes['collectionIds'] && this.collectionIds && this.collectionIds.length > 1)
+      this._service.getDeltatestComparison(this.collectionIds)
+        .subscribe(comparison => this.comparison = comparison);
   }
 }

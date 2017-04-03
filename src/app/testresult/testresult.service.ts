@@ -1,5 +1,5 @@
 import { Injectable }    from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -30,15 +30,9 @@ export class TestresultService {
   }
 
   getDeltatestComparison(collectionIds: string[]): Observable<DeltatestComparison> {
-    let options = new RequestOptions({
-      headers: this._headers,
-      body: JSON.stringify({
-        metric: "deltatest",
-        testresult_collections: collectionIds
-      })
-    });
-
-    return this._http.post(this._comparisonUrl, options)
+    return this._http.post(this._comparisonUrl,
+                           JSON.stringify({ metric: "deltatest", testresult_collections: collectionIds }),
+                           {headers: this._headers})
       .map(response => response.json() as DeltatestComparison[])
       .catch(this.handleError);
   }

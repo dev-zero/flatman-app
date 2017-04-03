@@ -1,2 +1,11 @@
-<div *ngIf="collectionIds.length > 1">
+<div *ngIf="comparison">
+  <ngx-datatable
+    class="material"
+    [rows]="comparison.values"
+    [columns]="columns"
+    [columnMode]="'force'"
+    [headerHeight]="32"
+    [footerHeight]="32"
+    [rowHeight]="'auto'">
+  </ngx-datatable>
 </div>

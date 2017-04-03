@@ -25,5 +25,8 @@ export class DeltatestComparisonComponent {
       this.selectedCollectionIds.splice(idx, 1);
     else
       this.selectedCollectionIds.push(id);
+
+    // workaround the "issue" that angular does not detect changes inside arrays:
+    this.selectedCollectionIds = this.selectedCollectionIds.slice();
   }
 }
