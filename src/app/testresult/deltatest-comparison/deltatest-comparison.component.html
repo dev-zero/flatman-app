@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-md-3">
+    <h3>Collections</h3>
+
+    Selected collections: {{ selectedCollectionIds.length }}
+
+    <div class="list-group">
+      <button *ngFor="let collection of collections | async"
+        type="button" class="list-group-item"
+        [class.active]="selectedCollectionIds.indexOf(collection.id) >= 0"
+        (click)="toggleCollectionSelection(collection.id)">
+        <span class="badge">{{ collection.testresult_count }}</span>
+        <b class="list-group-item-heading">{{ collection.name }}</b>
+        <p class="list-group-item-text">{{ collection.desc }}</p>
+      </button>
+    </div>
+
+  </div>
+  <div class="col-md-9">
+    <deltatest-comparison-list [collectionIds]="selectedCollectionIds"></deltatest-comparison-list>
+  </div>
+</div>

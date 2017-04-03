@@ -45,10 +45,14 @@ import { MaterialModule } from '@angular/material';
 import 'hammerjs';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { DeltatestReportComponent } from './testresult/deltatest-report/deltatest-report.component';
+
 import { TreeViewComponent } from './common/tree-view/tree-view.component';
 import { UnderscoreToSpacesPipe } from './underscore-to-spaces.pipe';
+
+import { DeltatestReportComponent } from './testresult/deltatest-report/deltatest-report.component';
 import { DeltatestReportListComponent } from './testresult/deltatest-report/deltatest-report-list.component';
+import { DeltatestComparisonComponent } from './testresult/deltatest-comparison/deltatest-comparison.component';
+import { DeltatestComparisonListComponent } from './testresult/deltatest-comparison/deltatest-comparison-list.component';
 
 @NgModule({
   imports: [
@@ -88,10 +92,12 @@ import { DeltatestReportListComponent } from './testresult/deltatest-report/delt
     DeltavaluePipe,
     StringifyPipe,
     Task2ListComponent,
-    DeltatestReportComponent,
     TreeViewComponent,
     UnderscoreToSpacesPipe,
-    DeltatestReportListComponent
+    DeltatestReportComponent,
+    DeltatestReportListComponent,
+    DeltatestComparisonComponent,
+    DeltatestComparisonListComponent
   ],
   providers: [
     ReportService,

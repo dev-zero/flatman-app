@@ -29,6 +29,7 @@ import './rxjs-operators';
                 Test Results <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a routerLink="/testresults/deltatest-report" routerLinkActive="active">Deltatest Reports</a></li>
+                  <li><a routerLink="/testresults/deltatest-comparison" routerLinkActive="active">Deltatest Comparison</a></li>
                 </ul>
             </li>
             <li><a routerLink="/machinestatus" routerLinkActive="active">Machine Status</a></li>

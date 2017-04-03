@@ -1,14 +1,16 @@
 import { Injectable }    from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 
 import { TestresultCollection } from './testresult-collection';
+import { DeltatestComparison } from './deltatest-comparison';
 
 @Injectable()
 export class TestresultService {
   private _headers: Headers;
   private _collectionUrl = "../api/v2/testresultcollections";
+  private _comparisonUrl = "../api/v2/comparisons";
 
   constructor(private _http: Http) {
     this._headers = new Headers();
@@ -24,6 +26,20 @@ export class TestresultService {
   getCollection(collectionId: string): Observable<TestresultCollection> {
     return this._http.get(this._collectionUrl + `/${collectionId}`, {headers: this._headers})
       .map(response => response.json() as TestresultCollection)
+      .catch(this.handleError);
+  }
+
+  getDeltatestComparison(collectionIds: string[]): Observable<DeltatestComparison> {
+    let options = new RequestOptions({
+      headers: this._headers,
+      body: JSON.stringify({
+        metric: "deltatest",
+        testresult_collections: collectionIds
+      })
+    });
+
+    return this._http.post(this._comparisonUrl, options)
+      .map(response => response.json() as DeltatestComparison[])
       .catch(this.handleError);
   }
 
