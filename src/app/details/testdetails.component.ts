@@ -35,10 +35,10 @@ export class TruncatePipe implements PipeTransform {
     <ul class='list-group'>
       <li class='list-group-item' *ngFor='let res of results'>
         <span class='text-muted'>
-          <a [href]="'../results/' + res.id + '/file'" target="_blank"> {{ res.task.structure.name }}</a>:
+          <a [href]="'../api/v1/results/' + res.id + '/file'" target="_blank"> {{ res.task.structure.name }}</a>:
           </span> 
           <span class='small'>
-            <b>{{ res.energy }} eV</b>, update: 
+            <b>{{ res.data.total_energy }} eV</b>, update: 
             <b>{{ res.task.mtime |truncate:16 }}</b> on 
             <b>{{ res.task.machine }}</b> 
             <span *ngIf='res.data?.mpiranks>0'>with <b>{{ res.data?.mpiranks }}</b> ranks</span>
