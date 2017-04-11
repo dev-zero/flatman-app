@@ -166,7 +166,7 @@ export class Details implements OnInit, OnDestroy {
   }
 
   getImgURL(): string {
-    var url="../plot?test=" + this.test1;
+    var url="../api/v1/plot?test=" + this.test1;
 
     for (var i = 0; i<this.selectedmethods.length; i++) {
       url+="&method="+this.selectedmethods[i];
